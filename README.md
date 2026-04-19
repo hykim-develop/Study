@@ -1,4 +1,4 @@
-# 📁 Portfolio Repository
+# 📁 Study Repository
 
 ## 📂 MultiCampus Folder
 데이터 분석 및 데이터 사이언스 학습 내용을 정리한 폴더입니다.
@@ -10,7 +10,7 @@
 ### 🛠 Tech Stack
 - Python 🐍
 - SQL 🗄️
-
+- (추가 예정)
 
 ---
 
@@ -36,3 +36,4 @@
 
 ## 📬 Contact
 - GitHub: [your-github-id](https://github.com/your-github-id)
+- Blog: https://youngowo.tistory.com/
