@@ -75,5 +75,5 @@
 ---
 
 ## 📬 Contact
-- GitHub: [your-github-id](https://github.com/your-github-id)
+- GitHub: [hykim-develop](https://github.com/hykim-develop)
 - Blog: https://youngowo.tistory.com/
