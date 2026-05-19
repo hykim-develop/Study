@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-
 <body>
     <h1>Main Page</h1>
+    <!-- 로그인을 한 유저의 이름을 대입 -->
+    <!-- app.py 파일에서 render_template() 함수가 사용할수 
+     있도록 만든 name 변수를 대입 -->
+    <p> {{name}} 님 안녕하세요!</p>
 
+
+    <!-- 그래프가 그려지는 영역을 먼저 선택 -->
     <div>
         <canvas id="myChart"></canvas>
     </div>
@@ -19,30 +23,70 @@
 
     <!-- 실제 그래프를 canvas에 그려주는 부분 -->
     <script>
-        // id가 myChart인 태그를 선택해서 상수 ctx에 대입 (변수는 let // var을 이용하여 변수를 생성)
+        // id가 myChart인 태그를 선택해서 상수 ctx에 대입 (변수는 let // var를 이용하여 변수를 생성)
         const ctx = document.getElementById('myChart');
 
         // Chart class를 생성 -> 그래프를 그려주는 부분
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    borderWidth: 1
-                }]
+        new Chart(
+            ctx,        // 어디에 그래프를 그릴것인가.
+            {
+                type: 'line',    // 그래프의 종류
+                data: {         // x, y 축의 데이터를 입력 
+                    labels: {{x | tojson}},     // x축의 데이터
+                    datasets: [{      // y축의 데이터들 -> [ {y축 데이터1}, {y축 데이터2}, ... ]
+                        label: '# of Votes',            // y축 데이터의 이름
+                        data: {{y | tojson}},     // y축의 데이터
+                        borderWidth: 1                  // 테두리 선의 두께 
+                    }]
             },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
+            options: {      // 그래프의 부과 설정
+                // scales: {
+                //     y: {
+                //     beginAtZero: true   // y축의 범위를 0부터 시작할것인가?
+                //     }
+                // }
             }
         });
     </script>
 
-</body>
+    <!-- 표를 생성 -->
+     <!-- table 태그, tr 태그 : 행을 표시, th, td 태그 : 열을 표시 -->
+        <!-- 
+            td_data -> 
+            [ 
+                {'Date' : xxxxxx, 
+                'Open' : xxx, 
+                'High' : xxxx, 
+                'Low' : xxxx, 
+                'Close' : xxx, 
+                'Adj Close' : xxxxx, 
+                'Volume' : xxxxx}, 
+            {} ] 
+        -->
+    <table border = 1>
+        <tr>
+            <!-- 
+                th_data -> ['Date', 'Open', 'High', 'Low', 'Close', 'Adj Close', 'Volumn']
+                반복문을 이용해서 작업을 하면 짧고 유동성이 있게 사용이 가능
+                 
+                python에서 for문은 들여쓰기를 통해 반복 실행 구문 선택 
+            -->
+            <!-- 반복문의 시작 -->
+            {% for col in th_data %}
+                <th>{{col}}</th>
+            <!-- 반복문이 끝 -->
+            {% endfor %}
+        </tr>
+        <!-- 1 -->
+        {% for row in td_data %}
+            <tr>
+                <!-- 2 -->
+                {% for col in th_data %}
+                    <td>{{row[col]}}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
 
+</body>
 </html>
