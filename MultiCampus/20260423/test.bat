@@ -1,0 +1,1 @@
+python C:\Users\ekfla\Documents\GitHub\multicam_11\20260423\news_crawlling.py
